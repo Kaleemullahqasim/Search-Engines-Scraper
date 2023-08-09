@@ -7,7 +7,7 @@ from concurrent.futures import ThreadPoolExecutor
 # Function to handle the search and write results to a file
 def search_and_write(query, output_file, max_retries=5, current_retry=0):
     try:
-        engine = Google ()
+        engine = Google()
         results = engine.search(query)
         links = results.links()
 
