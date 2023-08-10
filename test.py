@@ -2,6 +2,8 @@ import time
 import random
 from tqdm import tqdm
 from search_engines import Google
+from search_engines import Bing
+from search_engines import Yahoo
 from concurrent.futures import ThreadPoolExecutor
 
 # Function to handle the search and write results to a file
@@ -10,6 +12,15 @@ def search_and_write(query, output_file, max_retries=5, current_retry=0):
         engine = Google()
         results = engine.search(query)
         links = results.links()
+
+        engine = Bing()
+        results = engine.search(query)
+        links += results.links()
+
+        engine = Yahoo()
+        results = engine.search(query)
+        links += results.links()
+        
 
         with open(output_file, 'a') as f:
             for link in links:
