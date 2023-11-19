@@ -39,9 +39,9 @@ def search_query(query, output_file):
 
 def main():
     # File containing queries
-    file_path = '/Users/kaleemullahqasim/Desktop/YouTube Project Data/dorks/4/selected_domains_range_500000_1000000.txt'
+    file_path = '/Users/kaleemullahqasim/Desktop/Website Intention Classification/dork/reviews.txt'
     # Output file for the results
-    output_file = '/Users/kaleemullahqasim/Desktop/YouTube Project Data/dorks/4/data/500000_1000000.json'
+    output_file = '/Users/kaleemullahqasim/Desktop/Website Intention Classification/dork/reviews.json'
 
     # Read queries
     queries = read_queries(file_path)
