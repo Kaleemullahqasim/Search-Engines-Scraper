@@ -1,4 +1,4 @@
-from search_engines import Google
+from search_engines import Google , yahoo, bing
 from tqdm import tqdm
 import threading
 import time
@@ -18,7 +18,7 @@ def search_query(query, output_file):
         try:
             # Adding a delay to avoid rate-limiting
             time.sleep(1)
-            engine = Google()
+            engine = bing()
             results = engine.search(query)
             links = results.links()
 
@@ -39,15 +39,15 @@ def search_query(query, output_file):
 
 def main():
     # File containing queries
-    file_path = '/Users/kaleemullahqasim/Desktop/Website Intention Classification/dork/reviews.txt'
+    file_path = '/Users/kaleemullahqasim/Desktop/Website Intention Classification/dork/products/product.txt'
     # Output file for the results
-    output_file = '/Users/kaleemullahqasim/Desktop/Website Intention Classification/dork/reviews.json'
+    output_file = '/Users/kaleemullahqasim/Desktop/Website Intention Classification/dork/products/product-results.json'
 
     # Read queries
     queries = read_queries(file_path)
 
     # Using ThreadPoolExecutor to manage threads
-    with ThreadPoolExecutor(max_workers=60) as executor:
+    with ThreadPoolExecutor(max_workers=2) as executor:
         list(tqdm(executor.map(search_query, queries, [output_file] * len(queries)), total=len(queries), desc="Processing queries"))
 
     print("All queries processed successfully.")

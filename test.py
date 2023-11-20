@@ -9,15 +9,18 @@ from concurrent.futures import ThreadPoolExecutor
 # Function to handle the search and write results to a file
 def search_and_write(query, output_file, max_retries=5, current_retry=0):
     try:
+        time.sleep(5)
         engine = Google()
         results = engine.search(query)
         links = results.links()
 
         engine = Bing()
+        time.sleep(5)
         results = engine.search(query)
         links += results.links()
 
         engine = Yahoo()
+        time.sleep(5)
         results = engine.search(query)
         links += results.links()
         
@@ -35,11 +38,11 @@ def search_and_write(query, output_file, max_retries=5, current_retry=0):
             print(f"An error occurred: {e}. Maximum retries reached. Skipping this query.")
 
 # Read the queries from the input file
-with open('/Users/kaleemullahqasim/Desktop/YouTube Project Data/dorks/1/queries.txt', 'r') as f:
+with open('/Users/kaleemullahqasim/Desktop/Website Intention Classification/dork/products/product.txt', 'r') as f:
     queries = f.readlines()
 
 # Process each query
-with ThreadPoolExecutor(max_workers=5) as executor:
+with ThreadPoolExecutor(max_workers=2) as executor:
     for query in tqdm(queries, desc="Processing queries"):
         query = query.strip()  # Remove newline characters
-        executor.submit(search_and_write, query, '/Users/kaleemullahqasim/Desktop/YouTube Project Data//dorks/1/bing-1.txt')
+        executor.submit(search_and_write, query, '/Users/kaleemullahqasim/Desktop/Website Intention Classification/dork/products/product-results.txt')
